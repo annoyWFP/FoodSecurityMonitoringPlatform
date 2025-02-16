@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "FoodSecurityMonitoring": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:16225;http://localhost:16225",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": true
+    }
+  }
+}
