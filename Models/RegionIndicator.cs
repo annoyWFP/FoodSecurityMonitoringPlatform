@@ -1,5 +1,5 @@
 ﻿using System;
-namespace FoodSecurityMonitoring.Models
+namespace FoodSecurityMonitoringPlatform.Models
 {
     /// <summary>
     /// Represents food security data for an administrative region.

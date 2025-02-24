@@ -1,7 +1,7 @@
 ﻿using System;
-using FoodSecurityMonitoring.Models;
+using FoodSecurityMonitoringPlatform.Models;
 
-namespace FoodSecurityMonitoring.Services
+namespace FoodSecurityMonitoringPlatform.Services
 {
     public class FoodSecurityService : IFoodSecurityService
     {

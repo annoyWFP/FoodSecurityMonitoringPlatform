@@ -1,5 +1,5 @@
 ﻿using System;
-namespace FoodSecurityMonitoring.Models
+namespace FoodSecurityMonitoringPlatform.Models
 {
 	public class ApiResponse
 	{

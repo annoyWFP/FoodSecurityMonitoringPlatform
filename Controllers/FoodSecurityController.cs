@@ -1,7 +1,7 @@
-﻿using FoodSecurityMonitoring.Services;
+﻿using FoodSecurityMonitoringPlatform.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FoodSecurityMonitoring.Controllers
+namespace FoodSecurityMonitoringPlatform.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

@@ -1,51 +1,44 @@
-﻿using FoodSecurityMonitoring.Services;
+﻿using FoodSecurityMonitoringPlatform.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add configuration from appsettings.json.
-builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-
-// Force Kestrel to use a single port (e.g., 16225)
-builder.WebHost.UseUrls("http://localhost:16225", "https://localhost:16225");
-
 // Add services to the container.
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient<IFoodSecurityService, FoodSecurityService>();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("MyCorsPolicy", policy =>
+    options.AddPolicy("AllowReactDev", policy =>
     {
-        policy.WithOrigins("https://localhost:16225")
-              .AllowAnyMethod()
-              .AllowAnyHeader();
+        policy.WithOrigins("https://localhost:44422") // React dev server origin
+              .AllowAnyHeader()
+              .AllowAnyMethod();
     });
 });
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage();
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
 }
 
+app.UseCors("AllowReactDev");
+
 app.UseHttpsRedirection();
-app.UseCors("MyCorsPolicy");
-app.UseAuthorization();
-
-// Map API controllers.
-app.MapControllers();
-
-// Serve static files from the React build.
-// Ensure you have copied the build output into the wwwroot folder.
-app.UseDefaultFiles();
 app.UseStaticFiles();
+app.UseRouting();
 
-// Fallback routing: any request not matching an API route will serve index.html.
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller}/{action=Index}/{id?}");
+
 app.MapFallbackToFile("index.html");
 
+
 app.Run();
+
